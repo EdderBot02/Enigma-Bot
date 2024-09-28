@@ -1,0 +1,113 @@
+{
+  "users": {
+    "5212219667585@s.whatsapp.net": {
+      "exp": 775,
+      "limit": 10,
+      "registered": false,
+      "name": "+52 12219667585",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "useDocument": true,
+      "bank": 0,
+      "level": 0,
+      "premium": false,
+      "premiumTime": 0
+    },
+    "120363318664771191@g.us": {
+      "exp": 52,
+      "limit": 10,
+      "registered": false,
+      "name": {},
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "useDocument": true,
+      "bank": 0,
+      "level": 0,
+      "premium": false,
+      "premiumTime": 0
+    },
+    "5215539356057@s.whatsapp.net": {
+      "exp": 748,
+      "limit": 10,
+      "registered": false,
+      "name": "Edミ●﹏☉ミ",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "useDocument": true,
+      "bank": 0,
+      "level": 0,
+      "premium": false,
+      "premiumTime": 0
+    }
+  },
+  "chats": {
+    "5212219667585@s.whatsapp.net": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    },
+    "120363318664771191@g.us": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    },
+    "5215539356057@s.whatsapp.net": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    }
+  },
+  "stats": {
+    "youtube-play.js": {
+      "total": 14,
+      "success": 9,
+      "last": 1727451125862,
+      "lastSuccess": 1727451125862
+    },
+    "youtube-play2.js": {
+      "total": 5,
+      "success": 5,
+      "last": 1727405659633,
+      "lastSuccess": 1727405659633
+    },
+    "sticker-sticker.js": {
+      "total": 29,
+      "success": 16,
+      "last": 1727410883901,
+      "lastSuccess": 1727410883901
+    },
+    "_fakeAi.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1727451181016,
+      "lastSuccess": 1727451181016
+    }
+  },
+  "msgs": {},
+  "sticker": {},
+  "settings": {
+    "5212219667585@s.whatsapp.net": {
+      "self": false,
+      "autoread": false,
+      "status": 0
+    }
+  }
+}
