@@ -24,7 +24,7 @@ let caption = `╔═.✵.══════════╗
 
 await m.reply(caption)
 if (res.filesizeH.includes('GB') && parseInt(res.filesizeH.replace('GB', '')) > 1.8) return await m.sendMessage(m.chat, {text: 'El archivo no debe pesar mas de 2 GB'}, {quoted: m})
-await m.sendFile(m.chat, res.url, res.filename, '', m, null, {mimetype: res.ext, asDocument: true});
+await conn.sendFile(m.chat, res.url, res.filename, '', m, null, {mimetype: res.ext, asDocument: true});
 await m.react('✅')
 } catch (e) {
 await m.react('❌')
