@@ -72,7 +72,7 @@ global.loadDatabase = async function loadDatabase() {
 }
 loadDatabase()
 
-const { state, saveCreds } = await useMultiFileAuthState("sessions")
+const { state, saveCreds,saveState } = await useMultiFileAuthState("sessions")
 const question = (text) => { const rl = readline.createInterface({ input: process.stdin, output: process.stdout }); return new Promise((resolve) => { rl.question(text, resolve) }) }
 
 console.info = () => {} 
