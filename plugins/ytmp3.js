@@ -9,7 +9,7 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
         const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
         if(!(regexEnlaceYoutube.test(enlace)))
         {
-          const results = await youtubeSearch(${text})
+          const results = await youtubeSearch(`${text}`)
           enlace=results.video[0].url
         }
         const yt = await ytmp3(enlace)
