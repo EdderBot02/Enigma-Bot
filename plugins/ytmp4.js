@@ -5,7 +5,7 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
         await m.react('⌛')
         const yt = await ytmp4(`${args[0]}`)
       //  await delay(3 * 1000)
-        await conn.sendMessage(m.chat, {document: {url:yt}, caption:wm, mimetype: 'video/mp4', fileName: fname.replace(/^X2Download\.app-/, '') + `.mp4`}, {quoted: m})
+        await conn.sendMessage(m.chat, {document: {url:yt}, caption:"Enigma-Bot", mimetype: 'video/mp4', fileName: fname.replace(/^X2Download\.app-/, '') + `.mp4`}, {quoted: m})
         await m.react('✅');  
     }
     catch(e) {
