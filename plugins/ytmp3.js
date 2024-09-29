@@ -1,9 +1,18 @@
 import axios from 'axios';
+import {youtubeSearch} from '@bochilteam/scraper';
+
 let handler = async (m, { command, args, text, usedPrefix}) => {
     if (!args[0]) return m.reply("Ingresa el enlace del vídeo de YouTube")
     try { 
         await m.react('⌛')
-        const yt = await ytmp3(`${args[0]}`)
+        let enlace=`${args[0]}`
+        const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
+        if(!(regexEnlaceYoutube.test(enlace)))
+        {
+          const results = await youtubeSearch(${text})
+          enlace=results.video[0].url
+        }
+        const yt = await ytmp3(enlace)
        // await delay(3 * 1000)
         await conn.sendMessage(m.chat, { audio: { url:yt }, mimetype: 'audio/mpeg'} , { quoted: m })   
         await m.react('✅')
