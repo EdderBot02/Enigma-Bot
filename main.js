@@ -135,7 +135,25 @@ async function clearTmp() {
 setInterval(async () => {
 	await clearTmp()
 	console.log(chalk.cyan(`Se limpio la carpeta tmp`))
-}, 60000)
+}, 1000 * 60 * 5)
+
+function purgeSession() {
+let prekey = []
+let directorio = readdirSync("./GataBotSession")
+let filesFolderPreKeys = directorio.filter(file => {
+return file.startsWith('pre-key-')
+})
+prekey = [...prekey, ...filesFolderPreKeys]
+filesFolderPreKeys.forEach(files => {
+unlinkSync(`./GataBotSession/${files}`)
+})
+} 
+
+
+setInterval(async () => {
+  await purgeSession()
+  console.log(chalk.cyan(`Se limpio prekeys`))
+}, 1000 * 60 * 5)
 
 async function connectionUpdate(update) {
   const {connection, lastDisconnect, isNewLogin} = update
