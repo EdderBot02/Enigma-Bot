@@ -1,6 +1,6 @@
 import axios from 'axios';
 let handler = async (m, { command, args, text, usedPrefix}) => {
-    if (!args[0]) return conn.reply("Ingresa el enlace del vídeo de YouTube")
+    if (!args[0]) return m.reply("Ingresa el enlace del vídeo de YouTube")
     try { 
         await m.react('⌛')
         const yt = await ytmp3(`${args[0]}`)
