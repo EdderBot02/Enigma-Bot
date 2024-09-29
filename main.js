@@ -86,14 +86,11 @@ const connectionOptions = {
   let msg = await store.loadMessage(jid, clave.id)
   return msg?.message || ""
    },
-  connectTimeoutMs: 60000,
-  defaultQueryTimeoutMs: 0,
-  keepAliveIntervalMs: 10000,
-  emitOwnEvents: true,
-  fireInitQueries: true,
   generateHighQualityLinkPreview: true,
   syncFullHistory: true,
   markOnlineOnConnect: true,
+  defaultQueryTimeoutMs: undefined,
+  version: [2, 2513, 1],
   browser: ["Ubuntu", "Chrome", "20.0.04"],
 }
 
