@@ -81,6 +81,11 @@ const connectionOptions = {
   logger: pino({ level: "silent" }),
   printQRInTerminal: false,
   auth: state,
+  getMessage: async (clave) => {
+  let jid = jidNormalizedUser(clave.remoteJid)
+  let msg = await store.loadMessage(jid, clave.id)
+  return msg?.message || ""
+   },
   connectTimeoutMs: 60000,
   defaultQueryTimeoutMs: 0,
   keepAliveIntervalMs: 10000,
