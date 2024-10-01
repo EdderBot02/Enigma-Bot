@@ -87,7 +87,7 @@ const connectionOptions = {
   return msg?.message || ""
    },
   generateHighQualityLinkPreview: true,
-  syncFullHistory: true,
+  syncFullHistory: false,
   markOnlineOnConnect: true,
   defaultQueryTimeoutMs: undefined,
   version: [2, 2513, 1],
