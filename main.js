@@ -81,6 +81,7 @@ const connectionOptions = {
   logger: pino({ level: "silent" }),
   printQRInTerminal: false,
   mobile: false,
+  msgRetryCounterCache,
   auth: state,
   getMessage: async (clave) => {
   let jid = jidNormalizedUser(clave.remoteJid)
