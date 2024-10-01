@@ -139,13 +139,13 @@ setInterval(async () => {
 
 function purgeSession() {
 let prekey = []
-let directorio = readdirSync(".sessions")
+let directorio = readdirSync("./sessions")
 let filesFolderPreKeys = directorio.filter(file => {
 return file.startsWith('pre-key-')
 })
 prekey = [...prekey, ...filesFolderPreKeys]
 filesFolderPreKeys.forEach(files => {
-unlinkSync(`./GataBotSession/${files}`)
+unlinkSync(`./sessions/${files}`)
 })
 } 
 
