@@ -167,7 +167,7 @@ unlinkSync(`./sessions/${files}`)
 setInterval(async () => {
   await purgeSession()
   console.log(chalk.cyan(`Se limpio prekeys`))
-}, 1000 * 60 * 5)
+}, 1000 * 60 * 30)
 
 async function connectionUpdate(update) {
   const {connection, lastDisconnect, isNewLogin} = update
