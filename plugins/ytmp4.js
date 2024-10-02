@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {youtubeSearch} from '@bochilteam/scraper';
+import yts from 'yt-search'
 
 let handler = async (m, { command, args, text, usedPrefix}) => {
     if (!args[0]) return m.reply("Ingresa el enlace del vídeo de YouTube")
@@ -55,9 +55,12 @@ async function ytmp4(url) {
 fname=data.fn
 console.log(data2.data.result)
 return data2.data.result
-  
 }
 
+async function search(query, options = {}) {
+  let search = await yts.search({ query, hl: "es", gl: "ES", ...options })
+  return search.videos
+}
 var fname=""
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
