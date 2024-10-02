@@ -263,6 +263,33 @@ global.reload = async (_ev, filename) => {
     }
   }
 }
+
+async function _quickTest() {
+    const test = await Promise.all([
+    spawn('ffmpeg'),
+    spawn('ffprobe'),
+    spawn('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-filter_complex', 'color', '-frames:v', '1', '-f', 'webp', '-']),
+    spawn('convert'),
+    spawn('magick'),
+    spawn('gm'),
+    spawn('find', ['--version']),
+    ].map((p) => {
+    return Promise.race([
+    new Promise((resolve) => {
+    p.on('close', (code) => {
+    resolve(code !== 127);
+    });
+    }),
+    new Promise((resolve) => {
+    p.on('error', (_) => resolve(false));
+    })]);
+    }));
+    const [ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find] = test;
+    const s = global.support = {ffmpeg, ffprobe, ffmpegWebp, convert, magick, gm, find};
+    Object.freeze(global.support);
+}
+
+_quickTest().then(() => conn.logger.info("Loading")).catch(console.error)
 Object.freeze(global.reload)
 watch(pluginFolder, global.reload)
 
