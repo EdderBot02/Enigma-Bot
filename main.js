@@ -95,6 +95,10 @@ const connectionOptions = {
     conversation: ''
    }
   },
+  patchMessageBeforeSending: async (msg, recipientJids) => {
+                await sock.uploadPreKeysToServerIfRequired();
+                return msg;
+  },
   generateHighQualityLinkPreview: true,
   downloadHistory: false,
   syncFullHistory: false,
