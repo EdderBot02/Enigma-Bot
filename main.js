@@ -88,9 +88,9 @@ const connectionOptions = {
   },
   getMessage: async (clave) => {
    if (store) {
-   const msg = await store.loadMessage(key.remoteJid, key.id)
-   return msg?.message || undefined
-  }
+    const msg = await store.loadMessage(key.remoteJid, key.id)
+    return msg?.message || undefined
+   }
    return {
     conversation: ''
    }
