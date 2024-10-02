@@ -96,7 +96,7 @@ const connectionOptions = {
    }
   },
   patchMessageBeforeSending: async (msg, recipientJids) => {
-                await sock.uploadPreKeysToServerIfRequired();
+                await conn.uploadPreKeysToServerIfRequired();
                 return msg;
   },
   generateHighQualityLinkPreview: true,
