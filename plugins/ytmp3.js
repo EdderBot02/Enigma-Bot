@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {youtubeSearch} from '@bochilteam/scraper';
+import yts from 'yt-search'
 
 let handler = async (m, { command, args, text, usedPrefix}) => {
     if (!args[0]) return m.reply("Ingresa el enlace del vídeo de YouTube")
@@ -9,8 +9,8 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
         const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
         if(!(regexEnlaceYoutube.test(enlace)))
         {
-          const results = await youtubeSearch(`${text}`)
-          enlace=results.video[0].url
+          const results = await search(`${text}`)
+          enlace=results[0].url
         }
         const yt = await ytmp3(enlace)
        // await delay(3 * 1000)
@@ -55,6 +55,11 @@ async function ytmp3(url) {
   })
   
   return data2.data.d_url
+}
+
+async function search(query, options = {}) {
+  let search = await yts.search({ query, hl: "es", gl: "ES", ...options })
+  return search.videos
 }
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
