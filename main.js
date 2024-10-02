@@ -87,10 +87,14 @@ const connectionOptions = {
    keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
   },
   getMessage: async (clave) => {
-  let jid = jidNormalizedUser(clave.remoteJid)
-  let msg = await store.loadMessage(jid, clave.id)
-  return msg?.message || ""
-   },
+   if (store) {
+   const msg = await store.loadMessage(key.remoteJid, key.id)
+   return msg?.message || undefined
+  }
+   return {
+    conversation: ''
+   }
+  },
   generateHighQualityLinkPreview: true,
   downloadHistory: false,
   syncFullHistory: false,
