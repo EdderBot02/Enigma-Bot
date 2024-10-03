@@ -23,7 +23,7 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     return true
 }
 
-handler.command = /^(ytpro|yt(a|mp3)|ytmp3doc)$/i;
+handler.command = /^(play|ytpro|yt(a|mp3)|ytmp3doc)$/i;
 export default handler
 
 async function ytmp3(url) {
