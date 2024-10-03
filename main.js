@@ -151,6 +151,8 @@ setInterval(async () => {
 	console.log(chalk.cyan(`Se limpio la carpeta tmp`))
 }, 1000 * 60 * 5)
 
+
+/*
 function purgeSession() {
 let prekey = []
 let directorio = readdirSync("./sessions")
@@ -169,6 +171,7 @@ setInterval(async () => {
   console.log(chalk.cyan(`Se limpio prekeys`))
 }, 1000 * 60 * 30)
 
+*/
 async function connectionUpdate(update) {
   const {connection, lastDisconnect, isNewLogin} = update
   global.stopped = connection
