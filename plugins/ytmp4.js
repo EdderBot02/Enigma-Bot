@@ -24,7 +24,7 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     return 1
 }
 
-handler.command = /^(ytprovid|ytmp4doc|video|fgmp4|dlmp4|getvid|yt(v|mp4))$/i;
+handler.command = /^(play2|ytprovid|ytmp4doc|video|fgmp4|dlmp4|getvid|yt(v|mp4))$/i;
 export default handler
 
 async function ytmp4(url) {
