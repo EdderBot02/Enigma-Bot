@@ -188,7 +188,7 @@ console.log(update)
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
           try {
-	      saveCreds.bind(global.conn, true)
+	      await saveCreds.bind(global.conn, true)
               console.log(chalk.yellow('Restarting socket...'));
               await global.conn.end({ reason: 'Clearing store' });
           } catch (error) {
@@ -196,7 +196,7 @@ console.log(update)
           } finally {
             await global.reloadHandler(true).catch(console.error);
           }
-      }, 1 * 60 * 1000); 
+      }, 45 * 60 * 1000); 
   });
 }
 }
