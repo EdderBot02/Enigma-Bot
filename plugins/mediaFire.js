@@ -26,7 +26,7 @@ let caption = `╔═.✵.══════════╗
 
 //let url="https://download2389.mediafire.com/tg8moatxwpfgtAn64kdPUK5dJjnEW0TMdOYY20xulCdj5CqFr8PBNStEqzlzrZMCLCMyaXTX90Z_fdgRU44E8ZKytt8EDoBLGchw9z5V8G1k-jsEbi2vBmLGdD3nRz7VPh7M-BRyCoMSgy-0GSKCXB14E3CQq5PSgv1MeQ8rvThOyJo/fbdf2aydm7mbwoo/Waifu-Hub-15-season-1-modmenus.com.apk"
 await m.reply(caption)
-if (res.filesizeH.includes('GB') && parseInt(res.filesizeH.replace('GB', '')) > 1.8) return await m.sendMessage(m.chat, {text: 'El archivo no debe pesar mas de 2 GB'}, {quoted: m})
+if (res.filesizeH.includes('GB') && parseFloat(res.filesizeH.replace('GB', '')) > 1.79) return await m.reply('El archivo no debe pesar mas de 2 GB')
 await conn.sendFile(m.chat, res.url, res.filename, '', m, null, {mimetype: res.ext, asDocument: true});
 await m.react('✅')
 return
