@@ -185,24 +185,8 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
-    return new Promise((resolve, reject) => {
-      // Restart timer (refactored)
-      setTimeout(async () => {
-          try {
-              console.log(chalk.yellow('Restarting socket...'));
-              await conn.end({ reason: 'Clearing store' });
-          } catch (error) {
-              console.error(chalk.red('Error restarting socket:'), error.message);
-          } finally {
-            global.reloadHandler();
-          }
-      }, 300 * 60 * 1000); // 300 minutes
-  });
-  
-  
-  }
 }
-
+}
 process.on('uncaughtException', console.error)
 
 let isInit = true
