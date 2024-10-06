@@ -10,8 +10,8 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
         console.log(yt)
         console.log(duration)
         
-        if(verificarDuracion(duration)) await conn.sendMessage(m.chat, {document: {url:yt}, caption:"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", mimetype: 'video/mp4', fileName: `fb.mp4`}, {quoted: m})
-        else await conn.sendFile(m.chat,yt, 'fbdl.mp4',"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", m, null)
+        if(verificarDuracion(duration)) await conn.sendMessage(m.chat, {document: {url:yt}, caption:"ミ★ 𝘌𝘯𝘪𝘨𝘮𝘢-𝘉𝘰𝘵 ★彡", mimetype: 'video/mp4', fileName: `fb.mp4`}, {quoted: m})
+        else await conn.sendFile(m.chat,yt, 'fbdl.mp4',"ミ★ 𝘌𝘯𝘪𝘨𝘮𝘢-𝘉𝘰𝘵 ★彡", m, null)
       //await delay(3 * 1000)
         await m.react('✅');  
         
