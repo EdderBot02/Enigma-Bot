@@ -75,6 +75,7 @@ loadDatabase()
 const { state, saveCreds} = await useMultiFileAuthState("sessions")
 const question = (text) => { const rl = readline.createInterface({ input: process.stdin, output: process.stdout }); return new Promise((resolve) => { rl.question(text, resolve) }) }
 const msgRetryCounterCache = new NodeCache();
+const msgRetryCounterMap = (MessageRetryMap) => { }
 
 console.info = () => {} 
 const connectionOptions = {
@@ -82,26 +83,23 @@ const connectionOptions = {
   printQRInTerminal: false,
   mobile: false,
   msgRetryCounterCache,
+  msgRetryCounterMap,
   auth: {
    creds: state.creds,
    keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
   },
   getMessage: async (clave) => {
    if (store) {
-    const msg = await store.loadMessage(key.remoteJid, key.id)
-    return msg?.message || undefined
-   }
-   return {
-    conversation: ''
-   }
+   let jid = jidNormalizedUser(clave.remoteJid)
+   let msg = await store.loadMessage(jid, clave.id)
+   return msg?.message || ""
   },
   patchMessageBeforeSending: async (msg, recipientJids) => {
                 await conn.uploadPreKeysToServerIfRequired();
                 return msg;
   },
   generateHighQualityLinkPreview: true,
-  downloadHistory: false,
-  syncFullHistory: false,
+  syncFullHistory: true,
   markOnlineOnConnect: true,
   defaultQueryTimeoutMs: undefined,
   version: [2, 2513, 1],
