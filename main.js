@@ -185,19 +185,6 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
-    return new Promise((resolve, reject) => {
-      setTimeout(async () => {
-          try {
-	      await saveCreds.bind(global.conn, true)
-              console.log(chalk.yellow('Restarting socket...'));
-              await global.conn.end({ reason: 'Clearing store' });
-          } catch (error) {
-              console.error(chalk.red('Error restarting socket:'), error.message);
-          } finally {
-            await global.reloadHandler(true).catch(console.error);
-          }
-      }, 45 * 60 * 1000); 
-  });
 }
 }
 process.on('uncaughtException', console.error)
