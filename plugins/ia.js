@@ -6,7 +6,7 @@ if (!text) return conn.reply(m.chat,`Ingresa un texto`, m)
 await m.react('💬')
 try {
 let result=fetchContent(text)
-await conn.reply(m.chat,result, m)
+await conn.reply(m.chat,result.result, m)
 
 } catch {
 await m.react('✖️')
