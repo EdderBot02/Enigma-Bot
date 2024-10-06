@@ -5,7 +5,7 @@ await m.react('⌛')
 try {
 let res = await snapsave(args[0])
 let dl_url=res.data[1]?.url || res.data[0].url;
-await conn.sendFile(m.chat, dl_url, 'igdl.mp4',"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", m, null)
+await conn.sendFile(m.chat, dl_url, 'igdl.mp4',"ミ★ 𝘌𝘯𝘪𝘨𝘮𝘢-𝘉𝘰𝘵 ★彡", m, null)
 await m.react('✅')
 } catch {
 await m.react('✖️')
