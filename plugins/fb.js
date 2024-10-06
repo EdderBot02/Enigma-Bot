@@ -6,10 +6,15 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     try { 
         await m.react('⌛')
         let enlace=`${args[0]}`
-        const yt = await ytmp4(enlace)
-      //  await delay(3 * 1000)
-        await conn.sendMessage(m.chat, {document: {url:yt}, caption:"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", mimetype: 'video/mp4', fileName: `fb.mp4`}, {quoted: m})
+        const { yt, duration }= await ytmp4(enlace)
+        console.log(yt)
+        console.log(duration)
+        
+        if(verificarDuracion(duration)) await conn.sendMessage(m.chat, {document: {url:yt}, caption:"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", mimetype: 'video/mp4', fileName: `fb.mp4`}, {quoted: m})
+        else await conn.sendFile(m.chat,yt, 'fbdl.mp4',"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", m, null)
+      //await delay(3 * 1000)
         await m.react('✅');  
+        
     }
     catch(e) {
         await m.react('❌')
@@ -33,11 +38,26 @@ async function ytmp4(url) {
       "x-requested-with": "XMLHttpRequest"
     }
   })
- console.log(data)
- return data.links.sd
+ //console.log(data)
+ return {yt:data.links.sd,duration:data.duration}
 }
 
 
+
+function convertirADuracionEnSegundos(duracion) {
+  const [minutos, segundos] = duracion.split(':').map(Number);
+  return (minutos * 60) + segundos;
+}
+
+
+function verificarDuracion(duracion) {
+  const duracionEnSegundos = convertirADuracionEnSegundos(duracion);
+  if (duracionEnSegundos > 180) {
+    return true
+  } else {
+    return false
+  }
+}
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
