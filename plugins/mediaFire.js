@@ -1,7 +1,6 @@
 import axios from 'axios';
 import fetch from 'node-fetch';
 import cheerio from 'cheerio';
-import {mediafiredl} from '@bochilteam/scraper';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
