@@ -89,10 +89,9 @@ const connectionOptions = {
    keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
   },
   getMessage: async (clave) => {
-   if (store) {
-   let jid = jidNormalizedUser(clave.remoteJid)
-   let msg = await store.loadMessage(jid, clave.id)
-   return msg?.message || ""
+  let jid = jidNormalizedUser(clave.remoteJid)
+  let msg = await store.loadMessage(jid, clave.id)
+  return msg?.message || ""
   },
   patchMessageBeforeSending: async (msg, recipientJids) => {
                 await conn.uploadPreKeysToServerIfRequired();
