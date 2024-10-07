@@ -6,7 +6,7 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     try { 
         await m.react('⌛')
         let enlace=`${args[0]}`
-        const regexEnlaceYoutube =/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})(\?.*)?$/
+        const regexEnlaceYoutube =/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(shorts\/|watch\?v=)?([a-zA-Z0-9_-]{11})(\?.*)?$/
 
        // const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
         if(!(regexEnlaceYoutube.test(enlace)))
