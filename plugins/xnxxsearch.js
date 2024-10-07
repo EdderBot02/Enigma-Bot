@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 const handler = async (m, {text, usedPrefix, command}) => {
 if (!text) return m.reply("Ingrese titulo  buscar")
-//try {
+try {
 await m.react('⌛')
 const res = await xnxxsearch(text);
 console.log(res)
@@ -14,9 +14,9 @@ cap += `\n➠ Video : *(${index})*\n➠ Titulo: ${json[index].title}\n➠ Link: 
 m.reply(cap);
 await m.react('✅')
 
-//} catch {
+} catch {
     await m.react('❌')
-//}
+}
 }
 handler.command = /^xnxxsearch$/i
 export default handler
