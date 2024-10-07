@@ -6,15 +6,26 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     try { 
         await m.react('⌛')
         let enlace=`${args[0]}`
-        const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
+        const regexEnlaceYoutube =/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})(\?.*)?$/
+        //const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
         if(!(regexEnlaceYoutube.test(enlace)))
         {
           const results = await search(`${text}`)
+          let img = await (await fetch(`${results[0].thumbnail}`)).buffer()
+          let txt = '❍⌇─➭ *Youtube-Downloader* «•«━┑\n'
+              txt += `	➠  *Titulo* : ${results[0].title}\n`
+              txt += `	➠  *Duración* : ${results[0].timestamp}\n`
+              txt += `	➠  *Publicado* : ${results[0].ago}\n`
+              txt += `	➠  *Autor* : ${results[0].author.name}\n`
+              txt += `	➠  *Url* : ${results[0].url}\n\n⋘ 𝑃𝑙𝑒𝑎𝑠𝑒 𝑤𝑎𝑖𝑡... ⋙`
+          await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null)
           enlace=results[0].url
         }
         const yt = await ytmp4(enlace)
+        if(verificarDuracion(sec)) await conn.sendMessage(m.chat, {document: {url:yt}, caption:"ミ★ 𝘌𝘯𝘪𝘨𝘮𝘢-𝘉𝘰𝘵 ★彡", mimetype: 'video/mp4', fileName: fname.replace(/^X2Download\.app-/, '') + `.mp4`}, {quoted: m})
+        else await conn.sendFile(m.chat,yt,'yt.mp4',"ミ★ 𝘌𝘯𝘪𝘨𝘮𝘢-𝘉𝘰𝘵 ★彡", m, null)
       //  await delay(3 * 1000)
-        await conn.sendMessage(m.chat, {document: {url:yt}, caption:"Enigma-Bot ミ⁠●⁠﹏⁠☉⁠ミ", mimetype: 'video/mp4', fileName: fname.replace(/^X2Download\.app-/, '') + `.mp4`}, {quoted: m})
+        
         await m.react('✅');  
     }
     catch(e) {
@@ -39,7 +50,7 @@ async function ytmp4(url) {
       "x-requested-with": "XMLHttpRequest"
     }
   })
- console.log(data)
+ sec=data.t
 //  await delay(3 * 1000)
   const data2= await axios(`https://cv756.ytcdn.app/api/json/convert`, {
     method: "post",
@@ -62,5 +73,22 @@ async function search(query, options = {}) {
   return search.videos
 }
 var fname=""
+var sec=""
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+
+
+function convertirADuracionEnSegundos(duracion) {
+  const [minutos, segundos] = duracion.split(':').map(Number);
+  return (minutos * 60) + segundos;
+}
+
+
+function verificarDuracion(duracion) {
+  
+  if (duracion > 1500) {
+    return true
+  } else {
+    return false
+  }
+}
