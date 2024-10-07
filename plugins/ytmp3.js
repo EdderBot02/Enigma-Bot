@@ -6,10 +6,20 @@ let handler = async (m, { command, args, text, usedPrefix}) => {
     try { 
         await m.react('⌛')
         let enlace=`${args[0]}`
-        const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
+        const regexEnlaceYoutube =/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})(\?.*)?$/
+
+       // const regexEnlaceYoutube = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})$/;
         if(!(regexEnlaceYoutube.test(enlace)))
         {
           const results = await search(`${text}`)
+          let img = await (await fetch(`${results[0].thumbnail}`)).buffer()
+          let txt = '❍⌇─➭ *Youtube-Downloader* «•«━┑\n'
+              txt += `	➠  *Titulo* : ${results[0].title}\n`
+              txt += `	➠  *Duración* : ${results[0].timestamp}\n`
+              txt += `	➠  *Publicado* : ${results[0].ago}\n`
+              txt += `	➠  *Autor* : ${results[0].author.name}\n`
+              txt += `	➠  *Url* : ${results[0].url}\n\n⋘ 𝑃𝑙𝑒𝑎𝑠𝑒 𝑤𝑎𝑖𝑡... ⋙`
+          await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null)
           enlace=results[0].url
         }
         const yt = await ytmp3(enlace)
@@ -63,4 +73,3 @@ async function search(query, options = {}) {
 }
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-
