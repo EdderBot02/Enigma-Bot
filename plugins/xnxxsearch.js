@@ -9,7 +9,7 @@ const json = res.result;
 let cap = `❍⌇─➭ *XNXX-Buscador* «•«━┑\n`;
 let count = 1;
 for (let index = 0; index <= 4; index++) {
-cap += `\n➠ Video : *(${index})*\n➠ Titulo: ${json[index].title}\n➠ Link: ${json[index].link}\n➠ Info: ${json[index].info}\n\n`
+cap += `\n➠ Video : *(${index+1})*\n➠ Titulo: ${json[index].title}\n➠ Link: ${json[index].link}\n➠ Info: ${json[index].info}\n\n`
 }
 m.reply(cap);
 await m.react('✅')
