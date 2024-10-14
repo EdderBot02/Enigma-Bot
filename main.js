@@ -85,19 +85,16 @@ const connectionOptions = {
   msgRetryCounterCache,
   msgRetryCounterMap,
   auth: {
-   creds: state.creds,
-   keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
-  },
-  getMessage: async (clave) => {
-  let jid = jidNormalizedUser(clave.remoteJid)
-  let msg = await store.loadMessage(jid, clave.id)
-  return msg?.message || ""
-  },
-  patchMessageBeforeSending: async (msg, recipientJids) => {
-                await conn.uploadPreKeysToServerIfRequired();
-                return msg;
-  },
+    creds: state.creds,
+    keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
+    },
+    getMessage: async (clave) => {
+      let jid = jidNormalizedUser(clave.remoteJid)
+      let msg = await store.loadMessage(jid, clave.id)
+      return msg?.message || ""
+      },
   generateHighQualityLinkPreview: true,
+  shouldSyncHistoryMessage: false,
   syncFullHistory: true,
   markOnlineOnConnect: true,
   defaultQueryTimeoutMs: undefined,
@@ -171,7 +168,7 @@ setInterval(async () => {
 */
 async function connectionUpdate(update) {
 console.log(update)
-  const {connection, lastDisconnect, isNewLogin} = update
+  const {connection, lastDisconnect, isNewLogin,receivedPendingNotifications} = update
   global.stopped = connection
   if (isNewLogin) conn.isInit = true
   const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
@@ -182,6 +179,36 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
+      console.log("0000000000000000000000000000000000000000")
+			conn.ev.flush() // this
+
+    if (connection === 'close') {
+      if (reason === DisconnectReason.badSession) {
+          conn.logger.error(`[ ⚠ ] Sesión incorrecta, por favor elimina la carpeta ${global.authFile} y escanea nuevamente.`);
+          //process.exit();
+      } else if (reason === DisconnectReason.connectionClosed) {
+          conn.logger.warn(`[ ⚠ ] Conexión cerrada, reconectando...`);
+          await global.reloadHandler(true).catch(console.error);
+      } else if (reason === DisconnectReason.connectionLost) {
+          conn.logger.warn(`[ ⚠ ] Conexión perdida con el servidor, reconectando...`);
+          await global.reloadHandler(true).catch(console.error);
+      } else if (reason === DisconnectReason.connectionReplaced) {
+          conn.logger.error(`[ ⚠ ] Conexión reemplazada, se ha abierto otra nueva sesión. Por favor, cierra la sesión actual primero.`);
+          //process.exit();
+      } else if (reason === DisconnectReason.loggedOut) {
+          conn.logger.error(`[ ⚠ ] Conexion cerrada, por favor elimina la carpeta ${global.authFile} y escanea nuevamente.`);
+          //process.exit();
+      } else if (reason === DisconnectReason.restartRequired) {
+          conn.logger.info(`[ ⚠ ] Reinicio necesario, reinicie el servidor si presenta algún problema.`);
+          await global.reloadHandler(true).catch(console.error);
+      } else if (reason === DisconnectReason.timedOut) {
+          conn.logger.warn(`[ ⚠ ] Tiempo de conexión agotado, reconectando...`);
+          await global.reloadHandler(true).catch(console.error);
+      } else {
+          conn.logger.warn(`[ ⚠ ] Razón de desconexión desconocida. ${reason || ''}: ${connection || ''}`);
+          await global.reloadHandler(true).catch(console.error);
+      }
+  }
 }
 }
 process.on('uncaughtException', console.error)
