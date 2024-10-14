@@ -179,7 +179,6 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
-      console.log("0000000000000000000000000000000000000000")
 			conn.ev.flush() // this
 
     if (connection === 'close') {
