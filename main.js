@@ -95,7 +95,7 @@ const connectionOptions = {
       },
   generateHighQualityLinkPreview: true,
   shouldSyncHistoryMessage: false,
-  syncFullHistory: true,
+  syncFullHistory: false,
   markOnlineOnConnect: true,
   defaultQueryTimeoutMs: undefined,
   version: [2, 2513, 1],
@@ -179,8 +179,13 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
+      console.log("0000000000000000000000000000000000000000")
 			conn.ev.flush() // this
 
+  if (code && (code === DisconnectReason.restartRequired || code === 428)) {
+    conn.logger.info(chalk.yellow('\n🚩 Restart Required... Restarting'))
+    process.send('reset')
+  }
     if (connection === 'close') {
       if (reason === DisconnectReason.badSession) {
           conn.logger.error(`[ ⚠ ] Sesión incorrecta, por favor elimina la carpeta ${global.authFile} y escanea nuevamente.`);
