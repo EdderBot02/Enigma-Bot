@@ -222,6 +222,7 @@ global.reloadHandler = async function(restatConn) {
     const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error)
     if (Object.keys(Handler || {}).length) handler = Handler;
   } catch (e) {
+    process.send('reset')
     console.error(e)
   }
   if (restatConn) {
