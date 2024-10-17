@@ -179,8 +179,6 @@ console.log(update)
 
   if (connection == 'open') {
     console.log(chalk.cyan('Conectado correctamente.'))
-      console.log("0000000000000000000000000000000000000000")
-			conn.ev.flush() // this
 
   if (code && (code === DisconnectReason.restartRequired || code === 428)) {
     conn.logger.info(chalk.yellow('\n🚩 Restart Required... Restarting'))
