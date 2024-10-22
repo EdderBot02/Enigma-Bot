@@ -7,7 +7,7 @@ let handler = async (m, { conn,text, args, usedPrefix, command }) => {
 if (!text) return m.reply( `Ingresa link de canción`)
 try{
 // Init api with arl from cookie
-await api.initDeezerApi("66ec0fe5f4d44f45d55b3d154672cd02a9fc799a29240038536422331eaa6cfbbaccc582d2c2774ae5b213bcb5653dcdfe6f0485bcd3a881acbbd3e721288ddb8a0536dd746e589100b98b33ff4b6212fcb764b53d8e3af2688e06c3f565d69b");
+await api.initDeezerApi("c0302de76b1cd2d11a8e51ab3f06a74137493f174297a74c9414810a54378893c15a0d8df61fd170c68d43d0122397cc7f744572f51dcd1009a05f057aa9598b8aa852a30d167cd8bb1543e77524838edb87ba3183a208b1a6e07f240d3bebd4");
 
 // Verify user
 try {
