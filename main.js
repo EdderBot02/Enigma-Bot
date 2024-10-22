@@ -94,7 +94,7 @@ const connectionOptions = {
       return msg?.message || ""
       },
   generateHighQualityLinkPreview: true,
-  shouldSyncHistoryMessage: false,
+  shouldSyncHistoryMessage: () => false,
   syncFullHistory: false,
   markOnlineOnConnect: true,
   defaultQueryTimeoutMs: undefined,
@@ -103,6 +103,10 @@ const connectionOptions = {
 }
 
 global.conn = makeWASocket(connectionOptions)
+//conn.ev.flush()
+//console.log('Esperando 10 segundos...');
+
+//await delay(1000*5);
 
 if (!conn.authState.creds.registered) {
   const phoneNumber = await question(chalk.blue(' Ingresa el número de WhatsApp en el cual estará la Bot\n'))
@@ -125,6 +129,11 @@ if (!opts['test']) {
       if (opts['autocleartmp'] && (global.support || {}).find) (tmp = [os.tmpdir(), 'tmp', 'serbot'], tmp.forEach((filename) => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])))
     }, 30 * 1000)
   }
+}
+
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function clearTmp() {
