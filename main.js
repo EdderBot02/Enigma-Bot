@@ -88,16 +88,12 @@ const connectionOptions = {
     creds: state.creds,
     keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
     },
-    getMessage: async (clave) => {
-      let jid = jidNormalizedUser(clave.remoteJid)
-      let msg = await store.loadMessage(jid, clave.id)
-      return msg?.message || ""
-      },
+  getMessage: async () =>  "",
   generateHighQualityLinkPreview: true,
   shouldSyncHistoryMessage: () => false,
   syncFullHistory: false,
   markOnlineOnConnect: true,
-  defaultQueryTimeoutMs: undefined,
+  defaultQueryTimeoutMs: 1000,
   version: [2, 2513, 1],
   browser: ["Ubuntu", "Chrome", "20.0.04"],
 }
