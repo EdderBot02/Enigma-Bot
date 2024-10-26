@@ -5,7 +5,7 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
    await m.react('⌛')
    try {
     let txt = '❍⌇─➭ *TikTok-Buscador* «•«━┑\n'
-    let results =await axios.get(`https://deliriusapi-official.vercel.app/search/tiktoksearch?query=${text}`);
+    let results =await axios.get(`https://deliriussapi-oficial.vercel.app/search/tiktoksearch?query=${text}`);
     results=results.data.meta
 
     if (!results || !results.length) return conn.reply(m.chat, `No se encontraron resultados.`, m)
