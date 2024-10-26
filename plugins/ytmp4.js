@@ -1,6 +1,6 @@
 import axios from 'axios';
 import yts from 'yt-search'
-import { savefrom } from '@bochilteam/scraper-savefrom'
+
 
 let handler = async (m, { command, args, text, usedPrefix}) => {
     if (!args[0]) return m.reply("Ingresa el enlace del vídeo de YouTube")
